@@ -22,5 +22,5 @@ func init() {
 		}()
 		select{}
 	}()
-	Client = NewOrderClient(conn)
+	Client = NewTaskClient(conn)
 }
