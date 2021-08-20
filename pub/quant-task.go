@@ -5,15 +5,16 @@ import (
 	"log"
 )
 
-const PORT = ":10001"
+const PORT = ":10002"
 
 var Client TaskClient
 
-func init() {
+func InitClient() {
 	conn, err := grpc.Dial(PORT, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Panicf("InitClient quant-order err:%v", err)
 	}
+	Client = NewTaskClient(conn)
 	go func() {
 		defer func() {
 			log.Printf("conn close start")
@@ -22,5 +23,5 @@ func init() {
 		}()
 		select{}
 	}()
-	Client = NewTaskClient(conn)
+
 }
