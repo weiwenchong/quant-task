@@ -34,9 +34,8 @@ message PriceTask {
     string asset_code = 2;
     PriceCondition condition = 3;
     int64 price = 4;
-    int32 task_type = 5;
-    int64 start_time = 6;
-    string message = 7;
+    int64 start_time = 5;
+    string message = 6;
 }
 
 message CreatePriceTaskRes {
