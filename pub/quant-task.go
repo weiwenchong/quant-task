@@ -21,7 +21,7 @@ func InitClient() {
 			conn.Close()
 			log.Printf("conn close")
 		}()
-		select{}
+		select {}
 	}()
 
 }

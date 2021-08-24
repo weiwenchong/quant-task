@@ -18,8 +18,9 @@ enum SourceService {
 }
 
 enum PriceCondition {
-    LESS = 0;
-    GREATER = 1;
+    NOT_USE = 0;
+    LESS = 1;
+    GREATER = 2;
 }
 
 message CreatePriceTaskReq {
@@ -36,6 +37,7 @@ message PriceTask {
     int64 price = 4;
     int64 start_time = 5;
     string message = 6;
+    int64 Uid = 7;
 }
 
 message CreatePriceTaskRes {

@@ -16,6 +16,8 @@ func main() {
 		return
 	}
 
+	logic.InitLogic()
+
 	s := grpc.NewServer()
 	RegisterTaskServer(s, new(logic.GrpcTask))
 	log.Printf("task start")

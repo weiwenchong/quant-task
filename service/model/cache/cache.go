@@ -16,3 +16,8 @@ func init() {
 	})
 	log.Printf("cache init succeed")
 }
+
+func Publish(channel string, msg string) error {
+	_, err := Client.Publish(channel, msg).Result()
+	return err
+}
