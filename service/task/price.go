@@ -18,20 +18,20 @@ import (
 
 var (
 	// 上证 深证交易时间段
-	shzhStart1 int64 = 9*3600 + 30*60
-	shzhEnd1   int64 = 11*3600 + 30*60
-	shzhStart2 int64 = 13 * 3600
-	shzhEnd2   int64 = 15 * 3600
+	shzhStart1 int64 = 9*3600 + 29*60
+	shzhEnd1   int64 = 11*3600 + 31*60
+	shzhStart2 int64 = 13*3600 - 60
+	shzhEnd2   int64 = 15*3600 + 60
 
 	// 港股交易时间段
-	hkStart1 int64 = 9*3600 + 30*60
-	hkEnd1   int64 = 12 * 3600
-	hkStart2 int64 = 13 * 3600
-	hkEnd2   int64 = 16 * 3600
+	hkStart1 int64 = 9*3600 + 30*60 - 60
+	hkEnd1   int64 = 12*3600 + 60
+	hkStart2 int64 = 13*3600 - 60
+	hkEnd2   int64 = 16*3600 + 60
 
 	// 美股交易时间段
-	gbEnd   int64 = 5 * 3600
-	gbStart int64 = 21*3600 + 30*60
+	gbEnd   int64 = 5*3600 - 60
+	gbStart int64 = 21*3600 + 30*60 + 60
 )
 
 func UpdateAndCheckPriceTask() {
@@ -63,19 +63,19 @@ func UpdateAndCheckPriceTask() {
 	now := time.Now().Unix()
 	week := time.Now().Weekday()
 	todayTime := now - util.DayBeginStamp(now)
-
+	fmt.Println()
 	// 上证深证任务
-	if week >= 0 && week <= 4 && ((todayTime >= shzhStart1 && todayTime <= shzhEnd1) || (todayTime >= shzhStart2 && todayTime <= shzhEnd2)) {
+	if week >= 1 && week <= 5 && ((todayTime >= shzhStart1 && todayTime <= shzhEnd1) || (todayTime >= shzhStart2 && todayTime <= shzhEnd2)) {
 		needUpdateAssets = append(needUpdateAssets, shzh...)
 	}
 
 	// 港股任务
-	if week >= 0 && week <= 4 && ((todayTime >= hkStart1 && todayTime <= hkEnd1) || (todayTime >= hkStart2 && todayTime <= hkEnd2)) {
+	if week >= 1 && week <= 5 && ((todayTime >= hkStart1 && todayTime <= hkEnd1) || (todayTime >= hkStart2 && todayTime <= hkEnd2)) {
 		needUpdateAssets = append(needUpdateAssets, hk...)
 	}
 
 	// 美股任务
-	if (week == 0 && todayTime >= gbStart) || (week == 5 && todayTime <= gbEnd) || (week >= 1 && week <= 4 && (todayTime <= gbEnd || todayTime >= gbStart)) {
+	if (week == 1 && todayTime >= gbStart) || (week == 6 && todayTime <= gbEnd) || (week >= 2 && week <= 5 && (todayTime <= gbEnd || todayTime >= gbStart)) {
 		needUpdateAssets = append(needUpdateAssets, gb...)
 	}
 
