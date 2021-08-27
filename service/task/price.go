@@ -21,7 +21,7 @@ var (
 	shzhStart1 int64 = 9*3600 + 29*60
 	shzhEnd1   int64 = 11*3600 + 31*60
 	shzhStart2 int64 = 13*3600 - 60
-	shzhEnd2   int64 = 15*3600 + 60
+	shzhEnd2   int64 = 16*3600 + 60
 
 	// 港股交易时间段
 	hkStart1 int64 = 9*3600 + 30*60 - 60
@@ -115,36 +115,36 @@ func FactoryPrice(asset string) *price {
 func (m *price) getTaskids() (error, []int64) {
 	fun := "price.getTaskids -->"
 	ss := []string{}
-	price, err := cache.Client.Get(m.Asset).Result()
+	p, err := cache.Client.Get(m.Asset).Result()
 	if err != nil {
 		log.Printf("%s Get Price err:%v", fun, err)
 		return err, nil
 	}
 	vals, err := cache.Client.ZRangeByScore(fmt.Sprintf(PRICE_TASK_GREATER, m.Asset), redis.ZRangeBy{
-		Min:    price,
-		Max:    "9223372036854775807",
+		Min:    "-1",
+		Max:    p,
 		Offset: 0,
 		Count:  0,
 	}).Result()
 	if err != nil {
 		log.Printf("%s ZRangeByScore greater asset:%s err:%v", fun, m.Asset, err)
 	} else {
-		_, err = cache.Client.ZRemRangeByScore(fmt.Sprintf(PRICE_TASK_GREATER, m.Asset), price, "9223372036854775807").Result()
+		_, err = cache.Client.ZRemRangeByScore(fmt.Sprintf(PRICE_TASK_GREATER, m.Asset), "-1", p).Result()
 		if err != nil {
 			log.Printf("%s ZRemRangeByScore greater err:%v asset:%s", fun, err, m.Asset)
 		}
 	}
 	ss = append(ss, vals...)
 	vals1, err := cache.Client.ZRangeByScore(fmt.Sprintf(PRICE_TASK_LESS, m.Asset), redis.ZRangeBy{
-		Min:    "-1",
-		Max:    price,
+		Min:    p,
+		Max:    "9223372036854775807",
 		Offset: 0,
 		Count:  0,
 	}).Result()
 	if err != nil {
 		log.Printf("%s ZRangeByScore less asset:%s err:%v", fun, m.Asset, err)
 	} else {
-		_, err = cache.Client.ZRemRangeByScore(fmt.Sprintf(PRICE_TASK_GREATER, m.Asset), "-1", price).Result()
+		_, err = cache.Client.ZRemRangeByScore(fmt.Sprintf(PRICE_TASK_LESS, m.Asset), p, "9223372036854775807").Result()
 		if err != nil {
 			log.Printf("%s ZRemRangeByScore less err:%v asset:%s", fun, err, m.Asset)
 		}
