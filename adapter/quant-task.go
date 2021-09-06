@@ -1,4 +1,4 @@
-package Adapter
+package adapter
 
 import (
 	"github.com/gogf/gf/os/gcron"
