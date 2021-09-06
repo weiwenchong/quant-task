@@ -21,7 +21,7 @@ var (
 	shzhStart1 int64 = 9*3600 + 29*60
 	shzhEnd1   int64 = 11*3600 + 31*60
 	shzhStart2 int64 = 13*3600 - 60
-	shzhEnd2   int64 = 16*3600 + 60
+	shzhEnd2   int64 = 15*3600 + 60
 
 	// 港股交易时间段
 	hkStart1 int64 = 9*3600 + 30*60 - 60
