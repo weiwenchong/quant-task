@@ -1,7 +1,8 @@
-package pub
+package Adapter
 
 import (
 	"github.com/gogf/gf/os/gcron"
+	"github.com/wenchong-wei/quant-task/pub"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 	"log"
@@ -10,7 +11,7 @@ import (
 const PORT = "172.17.0.4:10001"
 
 var (
-	Client TaskClient
+	Client pub.TaskClient
 	Conn   *grpc.ClientConn
 )
 
@@ -23,7 +24,7 @@ func InitClient() {
 			if err != nil {
 				log.Printf("InitClient quant-order err:%v", err)
 			}
-			Client = NewTaskClient(Conn)
+			Client = pub.NewTaskClient(Conn)
 		}
 	})
 	log.Printf("initClient end")
