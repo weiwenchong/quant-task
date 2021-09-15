@@ -1,8 +1,8 @@
 package main
 
 import (
-	. "github.com/wenchong-wei/quant-task/pub"
-	"github.com/wenchong-wei/quant-task/service/logic"
+	. "github.com/weiwenchong/quant-task/pub"
+	"github.com/weiwenchong/quant-task/service/logic"
 	"google.golang.org/grpc"
 	"log"
 	"net"

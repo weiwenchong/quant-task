@@ -1,6 +1,6 @@
 package logic
 
-import "github.com/wenchong-wei/quant-task/service/task"
+import "github.com/weiwenchong/quant-task/service/task"
 
 func InitLogic() {
 	// 初始化调用rpc

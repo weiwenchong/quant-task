@@ -2,7 +2,7 @@ package adapter
 
 import (
 	"github.com/gogf/gf/os/gcron"
-	"github.com/wenchong-wei/quant-task/pub"
+	"github.com/weiwenchong/quant-task/pub"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 	"log"
@@ -15,7 +15,7 @@ var (
 	Conn   *grpc.ClientConn
 )
 
-func InitClient() {
+func init() {
 	log.Printf("initClient start")
 	gcron.Add("* * * * * *", func() {
 		var err error

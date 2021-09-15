@@ -1,4 +1,4 @@
-module github.com/wenchong-wei/quant-task
+module github.com/weiwenchong/quant-task
 
 go 1.15
 

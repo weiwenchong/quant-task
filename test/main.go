@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/wenchong-wei/quant-task/adapter"
-	"github.com/wenchong-wei/quant-task/pub"
-	"github.com/wenchong-wei/quant-task/service/util"
+	"github.com/weiwenchong/quant-task/adapter"
+	"github.com/weiwenchong/quant-task/pub"
+	"github.com/weiwenchong/quant-task/service/util"
 	"time"
 )
 
@@ -43,7 +43,6 @@ func main() {
 		fmt.Println(3)
 	}
 
-	adapter.InitClient()
 	fmt.Println(adapter.Client.CreatePriceTask(context.TODO(), &pub.CreatePriceTaskReq{
 		Source: 1,
 		Tasks: []*pub.PriceTask{{
